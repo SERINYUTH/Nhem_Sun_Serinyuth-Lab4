@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h3>Exercise 4 : Caesar Cipher</h3>
+
+    <h1 class="text-3xl font-semibold pb-2">Caesar Cipher</h1>
+
+    <div class="tabs tabs-lift">
+    <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 1" />
+    <div class="tab-content bg-base-100 border-base-300 p-2">
+        <div class="flex items-center gap-20 p-2">
+            <label for="plaintext" class="w-24">Plain Text:</label>
+            <input id="plaintext" class="input input-bordered w-full">
+        </div>
+
+        <div class="flex items-center gap-20 p-2">
+            <label for="shift" class="w-24">Shift:</label>
+            <input id="shift" class="input input-bordered w-full">
+        </div>
+
+        <div class="flex items-center gap-20 p-2">
+            <label for="ciphertext" class="w-24">Cipher Text:</label>
+            <textarea id="ciphertext" class="textarea textarea-bordered w-full bg-red-200" readonly></textarea>
+        </div>
+
+        <div class="flex justify-center mt-4">
+            <button class="btn btn-primary border-0 bg-red-500" onclick="encrypt()">Encrypt</button>
+        </div>
+    </div>
+
+    <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 2" checked="checked" />
+    <div class="tab-content bg-base-100 border-base-300 p-2">
+        <div class="flex items-center gap-20 p-2">
+            <label for="ciphertext" class="w-24">Cipher Text:</label>
+            <input id="plaintext" class="input input-bordered w-full">
+        </div>
+
+        <div class="flex items-center gap-20 p-2">
+            <label for="shift" class="w-24">Shift:</label>
+            <input id="shift" class="input input-bordered w-full">
+        </div>
+
+        <div class="flex items-center gap-20 p-2">
+            <label for="plaintext" class="w-24">Plain Text:</label>
+            <textarea id="plaintext" class="textarea textarea-bordered w-full bg-blue-200" readonly></textarea>
+        </div>
+
+        <div class="flex justify-center mt-4">
+            <button class="btn btn-primary border-0 bg-blue-500" onclick="decrypt()">Decrypt</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Core Caesar Cipher logic
+            function caesarCipher(text, shift) {
+                shift = parseInt(shift);
+                if (isNaN(shift)) return "";
+                shift = shift % 26;
+
+                let result = "";
+
+                for (let i = 0; i < text.length; i++) {
+                    let char = text[i];
+
+                    if (char >= 'A' && char <= 'Z') {
+                        result += String.fromCharCode(
+                            (char.charCodeAt(0) - 65 + shift + 26) % 26 + 65
+                        );
+                    } else if (char >= 'a' && char <= 'z') {
+                        result += String.fromCharCode(
+                            (char.charCodeAt(0) - 97 + shift + 26) % 26 + 97
+                        );
+                    } else {
+                        result += char;
+                    }
+                }
+
+                return result;
+            }
+
+            // Function to encrypt text in Tab 1
+            function encrypt() {
+                const tab1 = document.querySelectorAll(".tab-content")[0];
+                const plaintext = tab1.querySelector("input").value;
+                const shift = tab1.querySelectorAll("input")[1].value;
+                const output = tab1.querySelector("textarea");
+                output.value = caesarCipher(plaintext, shift);
+            }
+
+            // Function to decrypt text in Tab 2
+            function decrypt() {
+                const tab2 = document.querySelectorAll(".tab-content")[1];
+                const ciphertext = tab2.querySelector("input").value;
+                const shift = tab2.querySelectorAll("input")[1].value;
+                const output = tab2.querySelector("textarea");
+                output.value = caesarCipher(ciphertext, -shift);
+            }
+
+            // Attach to buttons
+            document.querySelector(".bg-red-500").addEventListener("click", encrypt);
+            document.querySelector(".bg-blue-500").addEventListener("click", decrypt);
+
+        });
+    </script>
+
+
+
+</body>
+
+</html>

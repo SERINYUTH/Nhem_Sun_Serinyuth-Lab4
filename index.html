@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 4 - JavaScript</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .btn {
+            border: 0;
+            background-color: navy;
+            color: white;
+            border-radius: 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+        }
+        
+        .output {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Exercise 1: Leap Year</h3>
+    <button class="btn" onclick="checkLeapYear()">Check Leap Year</button>
+
+    <script>
+        function checkLeapYear() {
+            let year = prompt("Enter a year:");
+            year = Number(year);
+
+            if (!year) {
+                alert("Invalid input!");
+                return;
+            }
+
+            if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+                alert(year + " is a Leap Year.");
+            } else {
+                alert(year + " is NOT a Leap Year.");
+            }
+        }
+    </script>
+    <hr>
+
+    <h3>Exercise 2: String with For Loop</h3>
+    <script>
+        let my_color = ["Red", "Green", "White", "Black"];
+        let result = "";
+
+        for (let i = 0; i < my_color.length; i++) {
+            result += my_color[i];
+
+            if (i < my_color.length - 1) {
+                result += ", ";
+            }
+        }
+
+        console.log(result);
+        document.write(result);
+    </script>
+    <hr>
+
+    <h3>Exercise 3: Greeting based on Time</h3>
+    <button class="btn" onclick="greet()">Greeting</button>
+
+    <script>
+        function greet() {
+            const d = new Date();
+            let hour = d.getHours();
+
+            let greeting;
+            if (hour >= 5 && hour < 12) {
+                greeting = "Good Morning";
+            } else if (hour >= 12 && hour < 17) {
+                greeting = "Good Afternoon";
+            } else if (hour >= 17 && hour < 20) {
+                greeting = "Good Evening";
+            } else {
+                greeting = "Good Night";
+            }
+
+            alert(greeting);
+            console.log(greeting);
+        }
+    </script>
+    <hr>
+
+    <h3>Exercise 4: Caesar Cipher</h3>
+    <a href="ex4.html" class="btn">Go to Exercise 4</a>
+
+</body>
+</html>
